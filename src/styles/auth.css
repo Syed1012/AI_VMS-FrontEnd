@@ -1,0 +1,77 @@
+#login-form {
+  width: 450px;
+  max-width: 50%;
+  margin: 50px auto;
+  background-color: #3d52a0;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px #3d52a0;
+  font-family: "Poppins", sans-serif;
+}
+
+.MovetoOther {
+  text-decoration: none;
+  color: #4d3f72; /* Set the color you desire */
+  font-weight: bold; /* Add other styles as needed */
+}
+
+.MovetoOther:hover {
+  text-decoration: underline; 
+}
+
+#login-form h1 {
+  text-align: center;
+  margin: 0;
+  padding: 20px 0;
+  font-size: 40px;
+  font-weight: bolder;
+  color: black;
+}
+
+#login-form form {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+
+}
+
+#login-form form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: black;
+  font-family: "Poppins", sans-serif;
+}
+
+#login-form form input[type="text"],
+#login-form form input[type="password"],
+#login-form form select[type="select"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #a3a1a1;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45) inset;
+}
+
+#login-form form input[type="submit"] {
+  width: 100%; /* Make the button full-width */
+  background-color: #3d52a0; /* Dark Purple */
+  margin-top: 10px;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-weight: bolder;
+  font-size: large;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.45) inset;
+  transition: background-color 0.3s ease;
+}
+
+#login-form form input[type="submit"]:hover {
+  background-color: #47279c;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}

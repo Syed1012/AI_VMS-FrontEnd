@@ -1,0 +1,18 @@
+.dashboard-card {
+    padding: 20px;
+    text-align: left;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 16px;
+  }
+  
+  .avatar {
+    background-color: #1976d2;
+  }
+  
+  button {
+    border-radius: 16px;
+  }
+  
