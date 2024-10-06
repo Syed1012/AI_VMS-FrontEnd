@@ -1,70 +1,136 @@
-# Getting Started with Create React App
+# 🚗 AI VMS (Vehicle Maintenance System)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Java](https://img.shields.io/badge/Java-11%2B-blue?style=for-the-badge&logo=java)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0-green?style=for-the-badge&logo=springboot)
+![Hibernate](https://img.shields.io/badge/Hibernate-ORM-red?style=for-the-badge&logo=hibernate)
+![Maven](https://img.shields.io/badge/Maven-4.0.0-orange?style=for-the-badge&logo=apachemaven)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue?style=for-the-badge&logo=postgresql)
+![JWT](https://img.shields.io/badge/JWT-Authentication-yellow?style=for-the-badge&logo=jsonwebtokens)
 
-## Available Scripts
+AI VMS (Vehicle Maintenance System) is a Java-based Spring Boot application designed to manage and track vehicle maintenance records. This system allows users to create, view, and maintain vehicle details, including servicing history, mileage, and more.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🚀 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- ➕ Create and track maintenance records for vehicles.
+- 📝 Store vehicle details such as make, model, and registration information.
+- 🛠️ Keep track of maintenance history, including dates, mileage, and types of services.
+- 🌐 RESTful API for easy integration with frontend applications.
+- 🛡️ Robust error handling and validation.
+- 📜 JWT authentication for secure access.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠 Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Backend:**  
+  ![Java](https://img.shields.io/badge/Java-11%2B-blue?style=flat-square)  
+  ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0-green?style=flat-square)  
+  ![Hibernate](https://img.shields.io/badge/Hibernate-ORM-red?style=flat-square)  
+  ![Maven](https://img.shields.io/badge/Maven-4.0.0-orange?style=flat-square)
 
-### `npm run build`
+- **Database:**  
+  ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue?style=flat-square)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Security:**  
+  ![JWT](https://img.shields.io/badge/JWT-Authentication-yellow?style=flat-square)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Tools:**  
+  ![Postman](https://img.shields.io/badge/Postman-Testing-orange?style=flat-square)  
+  ![Git](https://img.shields.io/badge/Git-VersionControl-yellow?style=flat-square)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 📦 Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Java 11 or higher
+- Maven 4.0 or higher
+- PostgreSQL/MySQL installed and configured
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Steps
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **Clone the repository:**
 
-## Learn More
+    ```bash
+    git clone https://github.com/YourUsername/ai-vms.git
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. **Navigate into the project directory:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```bash
+    cd ai-vms
+    ```
 
-### Code Splitting
+3. **Configure the database:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    Update the `application.properties` file (in `src/main/resources`) with your database connection details:
 
-### Analyzing the Bundle Size
+    ```properties
+    spring.datasource.url=jdbc:postgresql://localhost:5432/vehicle_maintenance
+    spring.datasource.username=your_db_username
+    spring.datasource.password=your_db_password
+    spring.jpa.hibernate.ddl-auto=update
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+4. **Build the project:**
 
-### Making a Progressive Web App
+    ```bash
+    mvn clean install
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+5. **Run the application:**
 
-### Advanced Configuration
+    ```bash
+    mvn spring-boot:run
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+6. The application will be running at:
 
-### Deployment
+    ```
+    http://localhost:8080
+    ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 📖 Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Creating a Maintenance Record
+
+You can use the following JSON payload to create a new maintenance record for a vehicle:
+
+```json
+{
+  "description": "Oil change and filter replacement",
+  "maintenanceDate": "2024-10-01",
+  "cost": 120.00,
+  "maintenanceType": "Engine Oil",
+  "mileage": 15000,
+  "engineTemperature": 75.5,
+  "oilLevel": 4.5,
+  "vehicleUsage": "regular",
+  "vehicle": {
+    "id": 1
+  }
+}
+
+### ❌ Error Handling
+The application uses consistent error handling mechanisms. For example, if any issue occurs (e.g., a bad request), the API will respond with a structured error message.
+
+Example error response:
+
+```json
+{
+  "timestamp": "2024-10-01T15:32:35.455+00:00",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "Vehicle ID is required",
+  "path": "/maintenance-records"
+}
+
+### 📝 License
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+
