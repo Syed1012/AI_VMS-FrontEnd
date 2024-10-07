@@ -25,6 +25,7 @@ const ChatBot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  
   const handleSend = async () => {
     if (input.trim()) {
       // Append user message to chat
