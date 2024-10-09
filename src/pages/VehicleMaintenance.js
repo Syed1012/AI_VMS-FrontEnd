@@ -8,7 +8,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Button,
   IconButton,
   Tooltip,
   Modal,
@@ -18,6 +17,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  Paper,
 } from "@mui/material";
 import {
   Download as DownloadIcon,
@@ -25,6 +25,7 @@ import {
   Close as CloseIcon,
 } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
+
 
 // Dummy Data
 const dummyRecords = [
@@ -68,6 +69,86 @@ const dummyRecords = [
     maintenanceType: "Routine",
     vehicle: { id: "GHI789" },
   },
+  {
+    id: 6,
+    description: "AC repair",
+    maintenanceDate: "2024-05-05",
+    cost: 500.0,
+    maintenanceType: "Urgent",
+    vehicle: { id: "JKL456" },
+  },
+  {
+    id: 7,
+    description: "Headlight replacement",
+    maintenanceDate: "2024-04-10",
+    cost: 90.0,
+    maintenanceType: "Routine",
+    vehicle: { id: "MNO789" },
+  },
+  {
+    id: 8,
+    description: "Engine tuning",
+    maintenanceDate: "2024-03-15",
+    cost: 350.0,
+    maintenanceType: "Routine",
+    vehicle: { id: "PQR123" },
+  },
+  {
+    id: 9,
+    description: "Windshield replacement",
+    maintenanceDate: "2024-02-20",
+    cost: 250.0,
+    maintenanceType: "Urgent",
+    vehicle: { id: "STU456" },
+  },
+  {
+    id: 10,
+    description: "Suspension repair",
+    maintenanceDate: "2024-02-01",
+    cost: 600.0,
+    maintenanceType: "Urgent",
+    vehicle: { id: "VWX789" },
+  },
+  {
+    id: 11,
+    description: "Spark plug replacement",
+    maintenanceDate: "2024-01-15",
+    cost: 40.0,
+    maintenanceType: "Routine",
+    vehicle: { id: "ABC987" },
+  },
+  {
+    id: 12,
+    description: "Alternator replacement",
+    maintenanceDate: "2023-12-20",
+    cost: 400.0,
+    maintenanceType: "Urgent",
+    vehicle: { id: "XYZ654" },
+  },
+  {
+    id: 13,
+    description: "Radiator repair",
+    maintenanceDate: "2023-11-15",
+    cost: 200.0,
+    maintenanceType: "Urgent",
+    vehicle: { id: "LMN321" },
+  },
+  {
+    id: 14,
+    description: "Brake fluid replacement",
+    maintenanceDate: "2023-10-30",
+    cost: 70.0,
+    maintenanceType: "Routine",
+    vehicle: { id: "DEF654" },
+  },
+  {
+    id: 15,
+    description: "Exhaust system repair",
+    maintenanceDate: "2023-09-20",
+    cost: 450.0,
+    maintenanceType: "Urgent",
+    vehicle: { id: "GHI321" },
+  },
 ];
 
 const StyledContainer = styled(Container)({
@@ -75,6 +156,7 @@ const StyledContainer = styled(Container)({
   borderRadius: "8px",
   padding: "24px",
   boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+  position: "relative",
 });
 
 const StyledBox = styled(Box)({
@@ -85,11 +167,23 @@ const StyledBox = styled(Box)({
   position: "relative",
 });
 
+const ScrollProgressBar = styled("div")(({ scrollProgress }) => ({
+  height: "4px",
+  width: `${scrollProgress}%`,
+  backgroundColor: "#d1c4e9", // Light purple
+  transition: "width 0.25s ease-out",
+  position: "absolute",
+  bottom: "-10px", // Place it below the filters
+  left: 0,
+  borderRadius: "2px",
+}));
+
 const VehicleMaintenance = ({ records = dummyRecords }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [filterType, setFilterType] = useState("");
   const [filterDate, setFilterDate] = useState("");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const handleViewDetails = (record) => {
     setSelectedRecord(record);
@@ -113,6 +207,14 @@ const VehicleMaintenance = ({ records = dummyRecords }) => {
     return matchesType && matchesDate;
   });
 
+  // Function to handle scroll progress calculation
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    const totalScrollableDistance = scrollHeight - clientHeight;
+    const scrollPercentage = (scrollTop / totalScrollableDistance) * 100 || 0;
+    setScrollProgress(scrollPercentage);
+  };
+
   return (
     <StyledContainer>
       <Typography variant="h5" gutterBottom>
@@ -120,7 +222,7 @@ const VehicleMaintenance = ({ records = dummyRecords }) => {
       </Typography>
 
       {/* Filters */}
-      <Box sx={{ display: "flex", gap: 2, marginBottom: 2 }}>
+      <Box sx={{ display: "flex", gap: 2, marginBottom: 4 }}>
         <FormControl fullWidth>
           <InputLabel id="filter-type-label">Maintenance Type</InputLabel>
           <Select
@@ -144,8 +246,20 @@ const VehicleMaintenance = ({ records = dummyRecords }) => {
         />
       </Box>
 
-      <TableContainer>
-        <Table>
+      {/* Scroll Progress Bar */}
+      <Box sx={{ position: "relative", marginBottom: 2 }}>
+        <ScrollProgressBar scrollProgress={scrollProgress} />
+      </Box>
+
+      <TableContainer
+        component={Paper}
+        sx={{
+          maxHeight: 400,
+          overflow: "auto",
+        }}
+        onScroll={handleScroll}
+      >
+        <Table stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
@@ -213,28 +327,29 @@ const MaintenanceDetailsModal = ({ open, onClose, record }) => {
         >
           <CloseIcon />
         </IconButton>
-        <Typography variant="body1" id="maintenance-details-description">
-          <strong>Description:</strong> {record?.description}
-          <br />
-          <strong>Maintenance Date:</strong>{" "}
-          {new Date(record?.maintenanceDate).toLocaleDateString()}
-          <br />
-          <strong>Cost:</strong> {record?.cost.toFixed(2)}
-          <br />
-          <strong>Maintenance Type:</strong> {record?.maintenanceType}
-          <br />
-          <strong>Vehicle:</strong> {record?.vehicle.id}
-          <br />
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => {
-            /* Add functionality for download/print */
-          }}
-        >
-          Download Report
-        </Button>
+        {record && (
+          <Box sx={{ marginTop: 2 }}>
+            <Typography>
+              <strong>ID:</strong> {record.id}
+            </Typography>
+            <Typography>
+              <strong>Description:</strong> {record.description}
+            </Typography>
+            <Typography>
+              <strong>Maintenance Date:</strong>{" "}
+              {new Date(record.maintenanceDate).toLocaleDateString()}
+            </Typography>
+            <Typography>
+              <strong>Cost:</strong> ${record.cost.toFixed(2)}
+            </Typography>
+            <Typography>
+              <strong>Maintenance Type:</strong> {record.maintenanceType}
+            </Typography>
+            <Typography>
+              <strong>Vehicle ID:</strong> {record.vehicle.id}
+            </Typography>
+          </Box>
+        )}
       </StyledBox>
     </Modal>
   );

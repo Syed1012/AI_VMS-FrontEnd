@@ -24,10 +24,10 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 // Dummy vehicle availability data
 const vehicleAvailabilityData = [
-  { type: "SUV", available: 15 },
-  { type: "Sedan", available: 10 },
-  { type: "Truck", available: 5 },
-  { type: "Hatchback", available: 20 },
+  { type: "SUV", available: 2 },
+  { type: "Sedan", available: 2 },
+  { type: "convertible", available: 1 },
+  { type: "Hatchback", available: 3 },
 ];
 
 // Dummy customer data

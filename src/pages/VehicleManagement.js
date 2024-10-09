@@ -14,6 +14,24 @@ const ManageVehicle = () => {
     // Sample data for now
     { id: 1, vin: '1HGCM82633A123456', make: 'Toyota', model: 'Camry', year: 2020, status: 'Active', owner: 'John Doe' },
     { id: 2, vin: '1HGCM82633A654321', make: 'Ford', model: 'Mustang', year: 2019, status: 'Inactive', owner: 'Jane Smith' },
+    { id: 3, vin: '1HGCM82633A789012', make: 'Honda', model: 'Civic', year: 2021, status: 'Active', owner: 'Alice Johnson' },
+    { id: 4, vin: '1HGCM82633A345678', make: 'Chevrolet', model: 'Malibu', year: 2018, status: 'Inactive', owner: 'Robert Brown' },
+    { id: 5, vin: '1HGCM82633A987654', make: 'BMW', model: 'X5', year: 2020, status: 'Active', owner: 'Emily Davis' },
+    { id: 6, vin: '1HGCM82633A111222', make: 'Mercedes', model: 'C-Class', year: 2017, status: 'Inactive', owner: 'Michael Wilson' },
+    { id: 7, vin: '1HGCM82633A333444', make: 'Audi', model: 'A4', year: 2019, status: 'Active', owner: 'Sarah Thompson' },
+    { id: 8, vin: '1HGCM82633A555666', make: 'Nissan', model: 'Altima', year: 2021, status: 'Active', owner: 'David Martinez' },
+    { id: 9, vin: '1HGCM82633A777888', make: 'Tesla', model: 'Model 3', year: 2022, status: 'Inactive', owner: 'Linda Garcia' },
+    { id: 10, vin: '1HGCM82633A999000', make: 'Hyundai', model: 'Elantra', year: 2018, status: 'Active', owner: 'James Clark' },
+    { id: 11, vin: '1HGCM82633A112233', make: 'Kia', model: 'Sorento', year: 2020, status: 'Inactive', owner: 'Maria Lee' },
+    { id: 12, vin: '1HGCM82633A445566', make: 'Volkswagen', model: 'Passat', year: 2019, status: 'Active', owner: 'Thomas Walker' },
+    { id: 13, vin: '1HGCM82633A778899', make: 'Jeep', model: 'Wrangler', year: 2021, status: 'Active', owner: 'Patricia Hall' },
+    { id: 14, vin: '1HGCM82633A999111', make: 'Subaru', model: 'Forester', year: 2022, status: 'Inactive', owner: 'Christopher Young' },
+    { id: 15, vin: '1HGCM82633A000111', make: 'Mazda', model: 'CX-5', year: 2017, status: 'Active', owner: 'Susan King' },
+    { id: 16, vin: '1HGCM82633A222333', make: 'Lexus', model: 'RX', year: 2020, status: 'Inactive', owner: 'Daniel Wright' },
+    { id: 17, vin: '1HGCM82633A444555', make: 'Volvo', model: 'XC60', year: 2019, status: 'Active', owner: 'Barbara Lopez' },
+    { id: 18, vin: '1HGCM82633A666777', make: 'Porsche', model: 'Cayenne', year: 2021, status: 'Active', owner: 'Steven Hill' },
+    { id: 19, vin: '1HGCM82633A888999', make: 'Jaguar', model: 'F-Pace', year: 2022, status: 'Inactive', owner: 'Elizabeth Scott' },
+    { id: 20, vin: '1HGCM82633A000222', make: 'Land Rover', model: 'Discovery', year: 2021, status: 'Active', owner: 'Mark Green' }
   ]);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [vehicleForm, setVehicleForm] = useState({ vin: '', make: '', model: '', year: '', status: '', owner: '' });
