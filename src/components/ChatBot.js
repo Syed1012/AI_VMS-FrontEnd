@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Box, Typography, TextField, IconButton, Avatar } from "@mui/material";
+import { Box, Typography, TextField, IconButton, Avatar, Button } from "@mui/material";
 import { Message, Close, Send } from "@mui/icons-material";
-import axios from "axios"; // Add this to make API requests
+import axios from "axios";
 import logo1 from "../resources/logo1.png";
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [options, setOptions] = useState(null);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -25,24 +26,30 @@ const ChatBot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  
   const handleSend = async () => {
     if (input.trim()) {
-      // Append user message to chat
       setMessages([...messages, { text: input, isBot: false }]);
+      setOptions(null);
 
       try {
-        // Send the user's message to the backend API
         const response = await axios.post("http://localhost:5000/chat", {
           question: input,
         });
 
-        // Append bot response to chat
         const botResponse = response.data.Answer;
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: botResponse, isBot: true },
-        ]);
+        
+        if (Array.isArray(botResponse)) {
+          setOptions(botResponse);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: "Please select one of the following options:", isBot: true },
+          ]);
+        } else {
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: botResponse, isBot: true },
+          ]);
+        }
       } catch (error) {
         console.error("Error fetching response from backend:", error);
         setMessages((prevMessages) => [
@@ -51,9 +58,17 @@ const ChatBot = () => {
         ]);
       }
 
-      // Clear the input
       setInput("");
     }
+  };
+
+  const handleOptionSelect = (option) => {
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { text: option, isBot: false },
+      { text: `You selected: ${option}. How can I assist you further?`, isBot: true },
+    ]);
+    setOptions(null);
   };
 
   const toggleChat = () => setIsOpen(!isOpen);
@@ -126,6 +141,20 @@ const ChatBot = () => {
                 </Typography>
               </Box>
             ))}
+            {options && (
+              <Box sx={{ mt: 2 }}>
+                {options.map((option, index) => (
+                  <Button
+                    key={index}
+                    variant="outlined"
+                    onClick={() => handleOptionSelect(option)}
+                    sx={{ mr: 1, mb: 1 }}
+                  >
+                    {option}
+                  </Button>
+                ))}
+              </Box>
+            )}
             <div ref={messagesEndRef} />
           </Box>
           <Box

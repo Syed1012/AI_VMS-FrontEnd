@@ -642,7 +642,13 @@ const Booking = () => {
                   component={RouterLink}
                   to="/registervehicle"
                   variant="contained"
-                  color="secondary"
+                  color="black"
+                  sx={{
+                    backgroundColor: "#B9E9FC",
+                    "&:hover": {
+                      backgroundColor: "#B0DAFF",
+                    },
+                  }}
                 >
                   Register Vehicle
                 </Button>
@@ -651,7 +657,13 @@ const Booking = () => {
                 {activeStep !== 0 && (
                   <Button
                     onClick={handleBack}
-                    sx={{ mr: 1 }}
+                    sx={{
+                      mr: 1,
+                      backgroundColor: "#B9E9FC",
+                      "&:hover": {
+                        backgroundColor: "#B0DAFF",
+                      },
+                    }}
                     disabled={isBooking}
                   >
                     Back
@@ -663,14 +675,26 @@ const Booking = () => {
                     color="primary"
                     onClick={handleSubmit}
                     disabled={isBooking}
+                    sx={{
+                      backgroundColor: "#B9E9FC", 
+                      "&:hover": {
+                        backgroundColor: "#B0DAFF", 
+                      },
+                    }}
                   >
                     {isBooking ? "Booking..." : "Book"}
                   </Button>
                 ) : (
                   <Button
                     variant="contained"
-                    color="primary"
+                    color="black"
                     onClick={handleNext}
+                    sx={{
+                      backgroundColor: "#B9E9FC", 
+                      "&:hover": {
+                        backgroundColor: "#B0DAFF", 
+                      },
+                    }}
                   >
                     Next
                   </Button>
