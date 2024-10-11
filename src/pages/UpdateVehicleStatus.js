@@ -252,6 +252,7 @@ const UpdateVehicleStatus = () => {
               startIcon={<FilterList />}
               onClick={handleFilterClick}
               variant="outlined"
+              sx ={{color:"black", borderColor:"transparent", fontSize:"18px"}}
             >
               Filter
             </Button>
