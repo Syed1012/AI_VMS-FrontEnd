@@ -1,0 +1,13 @@
+<!-- Save this as animated-favicon.svg in your public folder -->
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" stroke="#4CAF50" stroke-width="4" fill="#81C784">
+    <animateTransform
+      attributeName="transform"
+      type="rotate"
+      from="0 32 32"
+      to="360 32 32"
+      dur="2s"
+      repeatCount="indefinite"
+    />
+  </circle>
+</svg>
