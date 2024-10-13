@@ -1,14 +1,71 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { jwtDecode } from "jwt-decode";  // Import JWT decode library
-import "../styles/auth.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { jwtDecode } from "jwt-decode";
+import {
+  Button,
+  TextField,
+  InputAdornment,
+  IconButton,
+  Box,
+  Typography,
+  Container,
+  Paper,
+  Divider,
+  CircularProgress,
+} from "@mui/material";
+import { styled } from "@mui/system";
+import { Visibility, VisibilityOff, Email, Lock } from "@mui/icons-material";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#3d52a0",
+    },
+    secondary: {
+      main: "#4d3f72",
+    },
+  },
+});
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  marginTop: theme.spacing(8),
+  padding: theme.spacing(4),
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  backgroundColor: "#ffffff",
+  borderRadius: "10px",
+  boxShadow: "0 10px 20px rgba(61, 82, 160, 0.2)",
+}));
+
+const StyledForm = styled("form")(({ theme }) => ({
+  width: "100%",
+  marginTop: theme.spacing(1),
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  margin: theme.spacing(3, 0, 2),
+  padding: theme.spacing(1),
+  fontSize: "1rem",
+  fontWeight: "bold",
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  textDecoration: "none",
+  color: theme.palette.secondary.main,
+  "&:hover": {
+    textDecoration: "underline",
+  },
+}));
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
@@ -28,32 +85,24 @@ const Login = () => {
         const token = res.data.token;
         localStorage.setItem("token", token);
         window.dispatchEvent(new Event("storage"));
-        console.log("JWT Token:", token);
 
-        // Decode the token to get user role
         const decoded = jwtDecode(token);
-        const userRole = decoded.role; // Assuming role is stored in the token as 'role'
+        const userRole = decoded.role;
 
-        // Check the user role and navigate accordingly
         if (userRole === 1) {
-          // Admin
           navigate("/dashboard");
         } else if (userRole === 2) {
-          // Regular User
           navigate("/user-dashboard");
         }
 
-        // Show success notification after navigation
-        setTimeout(() => {
-          toast.success("Logged in successfully!", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-          });
-        }, 100);
+        toast.success("Logged in successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       } else {
         const errorMessage = res.data.message || "Login failed";
         console.error("Error:", errorMessage);
@@ -77,41 +126,103 @@ const Login = () => {
   };
 
   return (
-    <div id="login-form">
-      <h1>LOGIN</h1>
-      <form onSubmit={handleSubmit} method="POST">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p>
-          Don't have an account?
-          <Link to="/register" className="MovetoOther">
-            {" "}
-            Signup
-          </Link>
-        </p>
-        <p>
-          <Link to="/forgot-password" className="MovetoOther">
-            {" "}
-            Forgot Password?
-          </Link>
-        </p>
-        <input type="submit" value="Submit" disabled={isSubmitting} />
-      </form>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container
+        component="main"
+        maxWidth="sm"
+        sx={{ marginTop: "10px", marginBottom: "40px" }}
+      >
+        <StyledPaper elevation={6}>
+          <Typography
+            component="h1"
+            variant="h4"
+            sx={{
+              fontStyle: "italic",
+              fontFamily: "Times new Roman",
+              fontWeight: "bold",
+            }}
+            gutterBottom
+          >
+            Login
+          </Typography>
+          <StyledForm onSubmit={handleSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Email color="primary" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type={showPassword ? "text" : "password"}
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Lock color="primary" />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <StyledButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? <CircularProgress size={24} /> : "Sign In"}
+            </StyledButton>
+            <Box mt={2}>
+              <Typography variant="body2" align="center">
+                Don't have an account?{" "}
+                <StyledLink to="/register">Sign Up</StyledLink>
+              </Typography>
+            </Box>
+            <Divider style={{ margin: "16px 0" }} />
+            <Box mt={1}>
+              <Typography variant="body2" align="center">
+                <StyledLink to="/forgot-password">Forgot Password?</StyledLink>
+              </Typography>
+            </Box>
+          </StyledForm>
+        </StyledPaper>
+        <ToastContainer />
+      </Container>
+    </ThemeProvider>
   );
 };
 
