@@ -34,6 +34,7 @@ function App() {
         <Box flexGrow={1}>
           <Routes>
             
+            
             {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/features" element={<Features />} />
@@ -41,6 +42,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/register" element={<Register />} />
+
 
             {/* Protected Routes */}
             <Route path="/user-dashboard" element={
