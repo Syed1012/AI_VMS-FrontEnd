@@ -33,22 +33,34 @@ function App() {
         <Header />
         <Box flexGrow={1}>
           <Routes>
+            
+            {/* Public Routes */}
             <Route path="/" element={<Home />} />
             <Route path="/features" element={<Features />} />
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/register" element={<Register />} />
-            
-            {/* Public Routes */}
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/registervehicle" element={<RegisterVehicle />} />
-            <Route path="/profile" element={<Profile />} />
 
             {/* Protected Routes */}
             <Route path="/user-dashboard" element={
               <ProtectedRoute allowedRoles={[1, 2]}>
                 <UserDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/booking" element={
+              <ProtectedRoute allowedRoles={[1, 2]}>
+                <Booking />
+              </ProtectedRoute>
+            } />
+            <Route path="/registervehicle" element={
+              <ProtectedRoute allowedRoles={[1, 2]}>
+                <RegisterVehicle />
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute allowedRoles={[1, 2]}>
+                <Profile />
               </ProtectedRoute>
             } />
             <Route path="/updatestatus" element={
