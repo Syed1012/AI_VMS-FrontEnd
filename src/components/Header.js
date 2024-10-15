@@ -2,70 +2,72 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { jwtDecode } from "jwt-decode"; // To decode JWT token
+import { jwtDecode } from "jwt-decode";
 import "../styles/Header.css";
 import logo from "../resources/logo.png";
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole] = useState(null); // State to store user role
+  const [userRole, setUserRole] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-      // Decode the token to get the role
-      try {
-        const decodedToken = jwtDecode(token);
-        const role = decodedToken?.role || null;
-        setUserRole(role); // Save the role in state
-      } catch (error) {
-        console.error("Failed to decode token:", error);
-      }
-    }
-
-    const handleStorageChange = () => {
-      const updatedToken = localStorage.getItem("token");
-      setIsLoggedIn(!!updatedToken);
-      if (updatedToken) {
+    const checkLoginStatus = () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setIsLoggedIn(true);
         try {
-          const decodedToken = jwtDecode(updatedToken);
-          const role = decodedToken?.role || null;
-          setUserRole(role);
+          const decodedToken = jwtDecode(token);
+          setUserRole(decodedToken?.role || null);
         } catch (error) {
           console.error("Failed to decode token:", error);
         }
       } else {
-        setUserRole(null); // Reset the role when token is removed
+        setIsLoggedIn(false);
+        setUserRole(null);
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
+    checkLoginStatus();
+    window.addEventListener("storage", checkLoginStatus);
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("storage", checkLoginStatus);
     };
   }, []);
+
+    // // New effect to handle toast when login state changes
+    // useEffect(() => {
+    //   if (isLoggedIn) {
+    //     toast.success("Logged In.", {
+    //       position: "top-right",
+    //       autoClose: 3000,
+    //       hideProgressBar: false,
+    //       closeOnClick: true,
+    //       pauseOnHover: true,
+    //     });
+    //   }
+    // }, [isLoggedIn]);
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     setUserRole(null);
     navigate("/");
-    toast.success("Logged out successfully");
+    toast.success("Logged out successfully", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+    });
   };
 
   const handleHomeClick = () => {
-    if (isLoggedIn) {
-      if (userRole === 1) {
-        navigate("/dashboard");
-      } else {
-        navigate("/user-dashboard");
-      }
-    } else {
-      navigate("/");
-    }
+    navigate(
+      isLoggedIn ? (userRole === 1 ? "/dashboard" : "/user-dashboard") : "/"
+    );
   };
 
   const handleLogoClick = () => {
@@ -76,36 +78,8 @@ function Header() {
     if (isLoggedIn) {
       navigate(path);
     } else {
-      toast.error("Please login to continue", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
       navigate("/login");
     }
-  };
-
-  const handleBookingClick = () => {
-    handleProtectedLink("/booking");
-  };
-
-  const handleUpdateBookingClick = () => {
-    handleProtectedLink("/updatebooking");
-  };
-
-  const handleRegisterVehicleClick = () => {
-    handleProtectedLink("/registervehicle");
-  };
-
-  const handleupdateVehicleStatusClick = () => {
-    handleProtectedLink("/updatestatus");
-  };
-
-  const handleMaintenanceClick = () => {
-    handleProtectedLink("/maintenance");
   };
 
   return (
@@ -120,9 +94,7 @@ function Header() {
             alt="Logo"
             className="logo-img"
             onClick={handleLogoClick}
-            style={{
-              cursor: "pointer",
-            }}
+            style={{ cursor: "pointer" }}
           />
           <h1
             onClick={handleLogoClick}
@@ -156,30 +128,41 @@ function Header() {
             Features
           </Link>
 
-          {/* Booking Dropdown */}
-          <div className="dropdown">
+          {isLoggedIn ? (
+            <div className="dropdown">
+              <button
+                className="dropbtn"
+                style={{ fontFamily: "Times New Roman" }}
+              >
+                Booking
+              </button>
+              <div className="dropdown-content">
+                <button onClick={() => handleProtectedLink("/booking")}>
+                  Book Vehicle
+                </button>
+                <button onClick={() => handleProtectedLink("/updatebooking")}>
+                  Update Vehicle Booking
+                </button>
+                <button onClick={() => handleProtectedLink("/registervehicle")}>
+                  Register Vehicle
+                </button>
+                <button onClick={() => handleProtectedLink("/updatestatus")}>
+                  Update Vehicle status
+                </button>
+                <button onClick={() => handleProtectedLink("/maintenance")}>
+                  Maintenance
+                </button>
+              </div>
+            </div>
+          ) : (
             <button
-              className="dropbtn"
+              onClick={() => handleProtectedLink("/booking")}
               style={{ fontFamily: "Times New Roman" }}
             >
               Booking
             </button>
-            <div className="dropdown-content">
-              <button onClick={handleBookingClick}>Book Vehicle</button>
-              <button onClick={handleUpdateBookingClick}>
-                Update Vehicle Booking
-              </button>
-              <button onClick={handleRegisterVehicleClick}>
-                Register Vehicle
-              </button>
-              <button onClick={handleupdateVehicleStatusClick}>
-                Update Vehicle status
-              </button>
-              <button onClick={handleMaintenanceClick}>Maintenance</button>
-            </div>
-          </div>
+          )}
 
-          {/* Conditionally render Services dropdown based on role */}
           {isLoggedIn && userRole === 1 && (
             <div className="dropdown">
               <button
