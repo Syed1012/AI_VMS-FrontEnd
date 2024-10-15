@@ -137,17 +137,11 @@ function Header() {
                 Booking
               </button>
               <div className="dropdown-content">
-                <button onClick={() => handleProtectedLink("/booking")}>
-                  Book Vehicle
+                <button onClick={() => handleProtectedLink("/booking-options")}>
+                  Rent Vehicle
                 </button>
-                <button onClick={() => handleProtectedLink("/updatebooking")}>
-                  Update Vehicle Booking
-                </button>
-                <button onClick={() => handleProtectedLink("/registervehicle")}>
+                <button onClick={() => handleProtectedLink("/registervehicle-options")}>
                   Register Vehicle
-                </button>
-                <button onClick={() => handleProtectedLink("/updatestatus")}>
-                  Update Vehicle status
                 </button>
                 <button onClick={() => handleProtectedLink("/maintenance")}>
                   Maintenance
