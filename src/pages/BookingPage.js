@@ -12,6 +12,7 @@ import {
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { DirectionsCar, Edit, ArrowForward } from "@mui/icons-material";
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
 // Create a custom theme
 const theme = createTheme({
@@ -104,9 +105,9 @@ const BookingPage = () => {
             <Grid item xs={12}>
               <StyledButton
                 variant="contained"
-                color="primary"
+                color="success"
                 onClick={() => handleNavigation("/booking")}
-                startIcon={<DirectionsCar />}
+                startIcon={<EventAvailableIcon />}
                 endIcon={
                   <AnimatedIcon className="arrow-icon">
                     <ArrowForward />

@@ -12,6 +12,8 @@ import {
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 import { DirectionsCar, Edit, ArrowForward } from "@mui/icons-material";
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 
 // Create a custom theme
 const theme = createTheme({
@@ -104,9 +106,9 @@ const MaintenanceOptions = () => {
             <Grid item xs={12}>
               <StyledButton
                 variant="contained"
-                color="primary"
+                color="success"
                 onClick={() => handleNavigation("/bookmaintenance")}
-                startIcon={<DirectionsCar />}
+                startIcon={<CalendarTodayIcon />}
                 endIcon={
                   <AnimatedIcon className="arrow-icon">
                     <ArrowForward />
@@ -136,7 +138,7 @@ const MaintenanceOptions = () => {
                 variant="contained"
                 color="secondary"
                 onClick={() => handleNavigation("/user-aipredictionsdashboard")}
-                startIcon={<Edit />}
+                startIcon={<TipsAndUpdatesIcon />}
                 endIcon={
                   <AnimatedIcon className="arrow-icon">
                     <ArrowForward />
