@@ -6,65 +6,83 @@ import {
   Box,
   createTheme,
   ThemeProvider,
+  Paper,
+  Grid,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { DirectionsCar, Edit, ArrowForward } from "@mui/icons-material";
 
 // Create a custom theme
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#7AA2E3",
-      },
+  palette: {
+    primary: {
+      main: "#7AA2E3",
     },
-    typography: {
-      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-      h4: {
-        fontWeight: 600,
-      },
+    secondary: {
+      main: "#FF8E53",
     },
-  });
-  
-  const StyledContainer = styled(Container)(({ theme }) => ({
-    minHeight: "50vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-  
-  const GlassBox = styled(Box)(({ theme }) => ({
-    background: "white",
-    borderRadius: "15px",
-    padding: theme.spacing(4),
-    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
-    width: "100%",
-    maxWidth: 400,
-    transition: "transform 0.3s ease-in-out",
-    "&:hover": {
-      transform: "translateY(-5px)",
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    h4: {
+      fontWeight: 600,
     },
-  }));
-  
-  const StyledButton = styled(Button)(({ theme }) => ({
-    width: "100%",
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(1.5),
-    fontSize: "0.9rem",
-    fontWeight: "bold",
-    color: "white",
-    borderRadius: "8px",
-    transition: "all 0.3s ease-in-out",
-    "&:last-child": {
-      marginBottom: 0,
-    },
-    "&:hover": {
-      transform: "scale(1.02)",
-      boxShadow: "0 4px 20px rgba(122, 162, 227, 0.4)",
-    },
-  }));
+  },
+});
+
+const StyledContainer = styled(Container)(({ theme }) => ({
+  minHeight: "100vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const GlassBox = styled(Paper)(({ theme }) => ({
+  background: "rgba(255, 255, 255, 0.8)",
+  backdropFilter: "blur(10px)",
+  borderRadius: "20px",
+  padding: theme.spacing(6),
+  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+  width: "100%",
+  maxWidth: 600,
+  transition: "transform 0.3s ease-in-out",
+  "&:hover": {
+    transform: "translateY(-5px)",
+  },
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  width: "100%",
+  marginBottom: theme.spacing(2),
+  padding: theme.spacing(2),
+  fontSize: "1rem",
+  fontWeight: "bold",
+  color: "white",
+  borderRadius: "12px",
+  transition: "all 0.3s ease-in-out",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  "&:last-child": {
+    marginBottom: 0,
+  },
+  "&:hover": {
+    transform: "scale(1.03)",
+    boxShadow: "0 6px 20px rgba(0, 0, 0, 0.15)",
+  },
+}));
+
+const AnimatedIcon = styled(Box)(({ theme }) => ({
+  transition: "transform 0.3s ease-in-out",
+  "& svg": {
+    fontSize: "1.5rem",
+  },
+}));
+
 
 const RegisterVehiclePage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleNavigation = (path) => {
     navigate(path);
@@ -73,33 +91,48 @@ const RegisterVehiclePage = () => {
   return (
     <ThemeProvider theme={theme}>
       <StyledContainer maxWidth={false} disableGutters>
-        <GlassBox>
+        <GlassBox elevation={3}>
           <Typography
             variant="h4"
             component="h2"
             align="center"
             gutterBottom
-            style={{ color: "#333", marginBottom: "30px" }}
+            style={{ color: "#333", marginBottom: "40px" }}
           >
-            Choose an Option
+            Vehicle Booking Options
           </Typography>
-          <Box>
-            <StyledButton
-              variant="contained"
-              color="primary"
-              onClick={() => handleNavigation("/registervehicle")}
-            >
-              Register Vehicle
-            </StyledButton>
-            <StyledButton
-              variant="contained"
-              color="primary"
-              onClick={() => handleNavigation("/updatevehicle-status")}
-            >
-              Update Vehicle Status
-            </StyledButton>
-            
-          </Box>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <StyledButton
+                variant="contained"
+                color="primary"
+                onClick={() => handleNavigation("/registervehicle")}
+                startIcon={<DirectionsCar />}
+                endIcon={
+                  <AnimatedIcon className="arrow-icon">
+                    <ArrowForward />
+                  </AnimatedIcon>
+                }
+              >
+                Register Vehicle
+              </StyledButton>
+            </Grid>
+            <Grid item xs={12}>
+              <StyledButton
+                variant="contained"
+                color="secondary"
+                onClick={() => handleNavigation("/updatevehicle-status")}
+                startIcon={<Edit />}
+                endIcon={
+                  <AnimatedIcon className="arrow-icon">
+                    <ArrowForward />
+                  </AnimatedIcon>
+                }
+              >
+                Update Vehicle Status
+              </StyledButton>
+            </Grid>
+          </Grid>
         </GlassBox>
       </StyledContainer>
     </ThemeProvider>

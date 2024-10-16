@@ -1,20 +1,26 @@
-import React from 'react';
-import { 
-  Button, 
-  Container, 
-  Typography, 
+import React from "react";
+import {
+  Button,
+  Container,
+  Typography,
   Box,
   createTheme,
-  ThemeProvider
-} from '@mui/material';
-import { styled } from '@mui/system';
-import { useNavigate } from 'react-router-dom';
+  ThemeProvider,
+  Paper,
+  Grid,
+} from "@mui/material";
+import { styled } from "@mui/system";
+import { useNavigate } from "react-router-dom";
+import { DirectionsCar, Edit, ArrowForward } from "@mui/icons-material";
 
 // Create a custom theme
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#7AA2E3',
+      main: "#7AA2E3",
+    },
+    secondary: {
+      main: "#FF8E53",
     },
   },
   typography: {
@@ -26,40 +32,51 @@ const theme = createTheme({
 });
 
 const StyledContainer = styled(Container)(({ theme }) => ({
-  minHeight: '50vh',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  minHeight: "100vh",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 }));
 
-const GlassBox = styled(Box)(({ theme }) => ({
-  background: 'white',
-  borderRadius: '15px',
-  padding: theme.spacing(4),
-  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-  width: '100%',
-  maxWidth: 400,
-  transition: 'transform 0.3s ease-in-out',
-  '&:hover': {
-    transform: 'translateY(-5px)',
+const GlassBox = styled(Paper)(({ theme }) => ({
+  background: "rgba(255, 255, 255, 0.8)",
+  backdropFilter: "blur(10px)",
+  borderRadius: "20px",
+  padding: theme.spacing(6),
+  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+  width: "100%",
+  maxWidth: 600,
+  transition: "transform 0.3s ease-in-out",
+  "&:hover": {
+    transform: "translateY(-5px)",
   },
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  width: '100%',
+  width: "100%",
   marginBottom: theme.spacing(2),
-  padding: theme.spacing(1.5),
-  fontSize: '0.9rem',
-  fontWeight: 'bold',
-  color: 'white',
-  borderRadius: '8px',
-  transition: 'all 0.3s ease-in-out',
-  '&:last-child': {
+  padding: theme.spacing(2),
+  fontSize: "1rem",
+  fontWeight: "bold",
+  color: "white",
+  borderRadius: "12px",
+  transition: "all 0.3s ease-in-out",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  "&:last-child": {
     marginBottom: 0,
   },
-  '&:hover': {
-    transform: 'scale(1.02)',
-    boxShadow: '0 4px 20px rgba(122, 162, 227, 0.4)',
+  "&:hover": {
+    transform: "scale(1.03)",
+    boxShadow: "0 6px 20px rgba(0, 0, 0, 0.15)",
+  },
+}));
+
+const AnimatedIcon = styled(Box)(({ theme }) => ({
+  transition: "transform 0.3s ease-in-out",
+  "& svg": {
+    fontSize: "1.5rem",
   },
 }));
 
@@ -73,33 +90,63 @@ const MaintenanceOptions = () => {
   return (
     <ThemeProvider theme={theme}>
       <StyledContainer maxWidth={false} disableGutters>
-        <GlassBox>
-          <Typography variant="h4" component="h2" align="center" gutterBottom style={{ color: '#333', marginBottom: '30px' }}>
-            Choose an Option
+        <GlassBox elevation={3}>
+          <Typography
+            variant="h4"
+            component="h2"
+            align="center"
+            gutterBottom
+            style={{ color: "#333", marginBottom: "40px" }}
+          >
+            Vehicle Booking Options
           </Typography>
-          <Box>
-            <StyledButton
-              variant="contained"
-              color="primary"
-              onClick={() => handleNavigation('/bookmaintenance')}
-            >
-              BOOK MAINTENANCE
-            </StyledButton>
-            <StyledButton
-              variant="contained"
-              color="primary"
-              onClick={() => handleNavigation('/updatemaintenance')}
-            >
-              MODIFY MAINTENANCE DETAILS
-            </StyledButton>
-            <StyledButton
-              variant="contained"
-              color="primary"
-              onClick={() => handleNavigation('/user-aipredictionsdashboard')}
-            >
-              AI PREDICTIONS
-            </StyledButton>
-          </Box>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <StyledButton
+                variant="contained"
+                color="primary"
+                onClick={() => handleNavigation("/bookmaintenance")}
+                startIcon={<DirectionsCar />}
+                endIcon={
+                  <AnimatedIcon className="arrow-icon">
+                    <ArrowForward />
+                  </AnimatedIcon>
+                }
+              >
+                Book Vehicle Maintenance
+              </StyledButton>
+            </Grid>
+            <Grid item xs={12}>
+              <StyledButton
+                variant="contained"
+                color="primary"
+                onClick={() => handleNavigation("/updatemaintenance")}
+                startIcon={<DirectionsCar />}
+                endIcon={
+                  <AnimatedIcon className="arrow-icon">
+                    <ArrowForward />
+                  </AnimatedIcon>
+                }
+              >
+                Update Maintenance Schedule
+              </StyledButton>
+            </Grid>
+            <Grid item xs={12}>
+              <StyledButton
+                variant="contained"
+                color="secondary"
+                onClick={() => handleNavigation("/user-aipredictionsdashboard")}
+                startIcon={<Edit />}
+                endIcon={
+                  <AnimatedIcon className="arrow-icon">
+                    <ArrowForward />
+                  </AnimatedIcon>
+                }
+              >
+                AI Predictions
+              </StyledButton>
+            </Grid>
+          </Grid>
         </GlassBox>
       </StyledContainer>
     </ThemeProvider>
