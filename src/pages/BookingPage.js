@@ -106,7 +106,7 @@ const BookingPage = () => {
               <StyledButton
                 variant="contained"
                 color="success"
-                onClick={() => handleNavigation("/booking")}
+                onClick={() => handleNavigation("/Show-Vehicles")}
                 startIcon={<EventAvailableIcon />}
                 endIcon={
                   <AnimatedIcon className="arrow-icon">

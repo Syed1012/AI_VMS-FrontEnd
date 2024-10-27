@@ -27,6 +27,7 @@ import UpdateMaintenance from './pages/UpdateMaintenance';
 import UserAIDashboard from './pages/UserAIDashboard';
 import BookingPage from "./pages/BookingPage";
 import RegisterVehiclePage from './pages/RegisterVehiclePage';
+import ShowAvailableVehicles from './pages/ShowAvailableVehicles';
 
 function App() {
   return (
@@ -55,6 +56,11 @@ function App() {
             <Route path="/booking-options" element={
               <ProtectedRoute allowedRoles={[1, 2]}>
                 <BookingPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/Show-Vehicles" element={
+              <ProtectedRoute allowedRoles={[1, 2]}>
+                <ShowAvailableVehicles />
               </ProtectedRoute>
             } />
             <Route path="/booking" element={
