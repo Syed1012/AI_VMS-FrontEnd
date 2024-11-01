@@ -12,12 +12,12 @@
 .logo-container {
   display: flex;
   align-items: center; /* Align logo and text vertically */
-  gap: 10px; /* Space between the logo and website name */
+   /* Space between the logo and website name */
 }
 
 .logo-img {
-  height: 40px; /* Adjust the logo height */
-  width: auto; /* Maintain aspect ratio */
+  height: 80px; /* Adjust the logo height */
+  width: 130px; /* Maintain aspect ratio */
 }
 
 
