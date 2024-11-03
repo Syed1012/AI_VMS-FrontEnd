@@ -31,7 +31,7 @@ AI VMS (Vehicle Maintenance System) is a Java-based Spring Boot application desi
   ![Maven](https://img.shields.io/badge/Maven-4.0.0-orange?style=flat-square)
 
 - **Database:**  
-  ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue?style=flat-square)
+  Real time data integrations with MongoDB & Monitoring data through Grafana.
 
 - **Security:**  
   ![JWT](https://img.shields.io/badge/JWT-Authentication-yellow?style=flat-square)
