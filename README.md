@@ -92,44 +92,5 @@ AI VMS (Vehicle Maintenance System) is a Java-based Spring Boot application desi
     http://localhost:8080
     ```
 
----
-
-## 📖 Usage
-
-### Creating a Maintenance Record
-
-You can use the following JSON payload to create a new maintenance record for a vehicle:
-
-```json
-{
-  "description": "Oil change and filter replacement",
-  "maintenanceDate": "2024-10-01",
-  "cost": 120.00,
-  "maintenanceType": "Engine Oil",
-  "mileage": 15000,
-  "engineTemperature": 75.5,
-  "oilLevel": 4.5,
-  "vehicleUsage": "regular",
-  "vehicle": {
-    "id": 1
-  }
-}
-
-### ❌ Error Handling
-The application uses consistent error handling mechanisms. For example, if any issue occurs (e.g., a bad request), the API will respond with a structured error message.
-
-Example error response:
-
-```json
-{
-  "timestamp": "2024-10-01T15:32:35.455+00:00",
-  "status": 400,
-  "error": "Bad Request",
-  "message": "Vehicle ID is required",
-  "path": "/maintenance-records"
-}
-
 ### 📝 License
 This project is licensed under the MIT License. See the LICENSE file for details.
-
-
