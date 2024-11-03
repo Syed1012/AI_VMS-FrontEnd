@@ -4,7 +4,6 @@
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0-green?style=for-the-badge&logo=springboot)
 ![Hibernate](https://img.shields.io/badge/Hibernate-ORM-red?style=for-the-badge&logo=hibernate)
 ![Maven](https://img.shields.io/badge/Maven-4.0.0-orange?style=for-the-badge&logo=apachemaven)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue?style=for-the-badge&logo=postgresql)
 ![JWT](https://img.shields.io/badge/JWT-Authentication-yellow?style=for-the-badge&logo=jsonwebtokens)
 
 AI VMS (Vehicle Maintenance System) is a Java-based Spring Boot application designed to manage and track vehicle maintenance records. This system allows users to create, view, and maintain vehicle details, including servicing history, mileage, and more.
