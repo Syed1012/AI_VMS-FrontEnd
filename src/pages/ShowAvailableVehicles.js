@@ -63,6 +63,8 @@ const ShowAvailableVehicles = () => {
             <Typography variant="h6">Find Your Perfect Ride!</Typography>
           </Box>
           
+
+
           <Box sx={{ mb: 2 }}>
             <Typography gutterBottom>Distance</Typography>
             <Slider
@@ -74,12 +76,14 @@ const ShowAvailableVehicles = () => {
             />
           </Box>
 
+
+
           <Box sx={{ mb: 2 }}>
             <FormControlLabel
               control={<Checkbox />}
               label="Home Delivery"
             />
-            <Typography variant="caption">Additional Delivery charge applicable</Typography>
+            <Typography variant="caption">Additional Delivery charge's applicable</Typography>
           </Box>
 
           <Box sx={{ mb: 2 }}>
@@ -92,6 +96,8 @@ const ShowAvailableVehicles = () => {
               max={3800}
             />
           </Box>
+
+
 
           <Box sx={{ mb: 2 }}>
             <Typography gutterBottom>Car Details</Typography>
