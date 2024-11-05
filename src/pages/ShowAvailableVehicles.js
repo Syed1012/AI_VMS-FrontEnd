@@ -1,27 +1,44 @@
-import React, { useState } from 'react';
-import { Box, Grid, Card, CardContent, CardMedia, Typography, Button, Slider, Checkbox, FormControlLabel, Radio, RadioGroup, FormControl, FormLabel, Select, MenuItem } from '@mui/material';
+import React, { useState } from "react";
+import {
+  Box,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  Slider,
+  Checkbox,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 // import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const carData = [
   {
     id: 1,
-    name: 'Maruti Suzuki Swift 2022',
-    image: 'https://imgd.aeplcdn.com/1056x594/n/itk98db_1738093.jpg?q=80',
+    name: "Maruti Suzuki Swift 2022",
+    image: "https://imgd.aeplcdn.com/1056x594/n/itk98db_1738093.jpg?q=80",
     rating: 4.15,
     trips: 199,
     price: 90,
     totalPrice: 360,
-    transmission: 'Manual',
-    fuelType: 'Petrol',
+    transmission: "Manual",
+    fuelType: "Petrol",
     seats: 5,
     distance: 3.4,
-    features: ['ACTIVE FASTAG'],
+    features: ["ACTIVE FASTAG"],
   },
   // Add more car objects here...
 ];
 
 const ShowAvailableVehicles = () => {
-  const [sortBy, setSortBy] = useState('Relevance');
+  const [sortBy, setSortBy] = useState("Relevance");
   const [distance, setDistance] = useState(50);
   const [priceRange, setPriceRange] = useState([200, 3800]);
   const [filters, setFilters] = useState({
@@ -29,7 +46,7 @@ const ShowAvailableVehicles = () => {
     transmission: [],
     fuelType: [],
     seats: [],
-    userRating: '',
+    userRating: "",
   });
 
   const handleSortChange = (event) => {
@@ -45,13 +62,13 @@ const ShowAvailableVehicles = () => {
   };
 
   const handleFilterChange = (category, value) => {
-    setFilters(prevFilters => ({
+    setFilters((prevFilters) => ({
       ...prevFilters,
       [category]: Array.isArray(prevFilters[category])
         ? prevFilters[category].includes(value)
-          ? prevFilters[category].filter(item => item !== value)
+          ? prevFilters[category].filter((item) => item !== value)
           : [...prevFilters[category], value]
-        : value
+        : value,
     }));
   };
 
@@ -62,8 +79,6 @@ const ShowAvailableVehicles = () => {
           <Box sx={{ mb: 2 }}>
             <Typography variant="h6">Find Your Perfect Ride!</Typography>
           </Box>
-          
-
 
           <Box sx={{ mb: 2 }}>
             <Typography gutterBottom>Distance</Typography>
@@ -76,14 +91,11 @@ const ShowAvailableVehicles = () => {
             />
           </Box>
 
-
-
           <Box sx={{ mb: 2 }}>
-            <FormControlLabel
-              control={<Checkbox />}
-              label="Home Delivery"
-            />
-            <Typography variant="caption">Additional Delivery charge's applicable</Typography>
+            <FormControlLabel control={<Checkbox />} label="Home Delivery" />
+            <Typography variant="caption">
+              Additional Delivery charge's applicable
+            </Typography>
           </Box>
 
           <Box sx={{ mb: 2 }}>
@@ -97,16 +109,19 @@ const ShowAvailableVehicles = () => {
             />
           </Box>
 
-
-
           <Box sx={{ mb: 2 }}>
             <Typography gutterBottom>Car Details</Typography>
             <FormControl component="fieldset">
               <FormLabel component="legend">Filter By Car Type</FormLabel>
-              {['SUV', 'Sedan', 'Hatchback', 'Luxury'].map((type) => (
+              {["SUV", "Sedan", "Hatchback", "Luxury"].map((type) => (
                 <FormControlLabel
                   key={type}
-                  control={<Checkbox checked={filters.carType.includes(type)} onChange={() => handleFilterChange('carType', type)} />}
+                  control={
+                    <Checkbox
+                      checked={filters.carType.includes(type)}
+                      onChange={() => handleFilterChange("carType", type)}
+                    />
+                  }
                   label={type}
                 />
               ))}
@@ -116,10 +131,15 @@ const ShowAvailableVehicles = () => {
           <Box sx={{ mb: 2 }}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Filter By Transmission</FormLabel>
-              {['Manual', 'Automatic'].map((type) => (
+              {["Manual", "Automatic"].map((type) => (
                 <FormControlLabel
                   key={type}
-                  control={<Checkbox checked={filters.transmission.includes(type)} onChange={() => handleFilterChange('transmission', type)} />}
+                  control={
+                    <Checkbox
+                      checked={filters.transmission.includes(type)}
+                      onChange={() => handleFilterChange("transmission", type)}
+                    />
+                  }
                   label={type}
                 />
               ))}
@@ -129,10 +149,15 @@ const ShowAvailableVehicles = () => {
           <Box sx={{ mb: 2 }}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Filter By Fuel Type</FormLabel>
-              {['Diesel', 'Petrol', 'Electric'].map((type) => (
+              {["Diesel", "Petrol", "Electric"].map((type) => (
                 <FormControlLabel
                   key={type}
-                  control={<Checkbox checked={filters.fuelType.includes(type)} onChange={() => handleFilterChange('fuelType', type)} />}
+                  control={
+                    <Checkbox
+                      checked={filters.fuelType.includes(type)}
+                      onChange={() => handleFilterChange("fuelType", type)}
+                    />
+                  }
                   label={type}
                 />
               ))}
@@ -142,10 +167,15 @@ const ShowAvailableVehicles = () => {
           <Box sx={{ mb: 2 }}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Seats</FormLabel>
-              {['4/5 Seater', '6/7 Seater'].map((type) => (
+              {["4/5 Seater", "6/7 Seater"].map((type) => (
                 <FormControlLabel
                   key={type}
-                  control={<Checkbox checked={filters.seats.includes(type)} onChange={() => handleFilterChange('seats', type)} />}
+                  control={
+                    <Checkbox
+                      checked={filters.seats.includes(type)}
+                      onChange={() => handleFilterChange("seats", type)}
+                    />
+                  }
                   label={type}
                 />
               ))}
@@ -157,10 +187,23 @@ const ShowAvailableVehicles = () => {
               <FormLabel component="legend">User Ratings</FormLabel>
               <RadioGroup
                 value={filters.userRating}
-                onChange={(e) => handleFilterChange('userRating', e.target.value)}
+                onChange={(e) =>
+                  handleFilterChange("userRating", e.target.value)
+                }
               >
-                {['4.5+ Rated', '4.2+ Rated', '4.0+ Rated', '3.5+ Rated', 'All'].map((rating) => (
-                  <FormControlLabel key={rating} value={rating} control={<Radio />} label={rating} />
+                {[
+                  "4.5+ Rated",
+                  "4.2+ Rated",
+                  "4.0+ Rated",
+                  "3.5+ Rated",
+                  "All",
+                ].map((rating) => (
+                  <FormControlLabel
+                    key={rating}
+                    value={rating}
+                    control={<Radio />}
+                    label={rating}
+                  />
                 ))}
               </RadioGroup>
             </FormControl>
@@ -168,20 +211,37 @@ const ShowAvailableVehicles = () => {
         </Grid>
 
         <Grid item xs={12} sm={9}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-            <Typography variant="h6">Showing {carData.length} cars at</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 2,
+            }}
+          >
+            <Typography variant="h6">
+              Showing {carData.length} cars at
+            </Typography>
             <FormControl>
               <Select
                 value={sortBy}
                 onChange={handleSortChange}
                 displayEmpty
-                inputProps={{ 'aria-label': 'Sort by' }}
+                inputProps={{ "aria-label": "Sort by" }}
               >
                 <MenuItem value="Relevance">Relevance</MenuItem>
-                <MenuItem value="Price - Low to High">Price - Low to High</MenuItem>
-                <MenuItem value="Price - High to Low">Price - High to Low</MenuItem>
-                <MenuItem value="Ratings - High to Low">Ratings - High to Low</MenuItem>
-                <MenuItem value="Distance - Nearest First">Distance - Nearest First</MenuItem>
+                <MenuItem value="Price - Low to High">
+                  Price - Low to High
+                </MenuItem>
+                <MenuItem value="Price - High to Low">
+                  Price - High to Low
+                </MenuItem>
+                <MenuItem value="Ratings - High to Low">
+                  Ratings - High to Low
+                </MenuItem>
+                <MenuItem value="Distance - Nearest First">
+                  Distance - Nearest First
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -214,7 +274,12 @@ const ShowAvailableVehicles = () => {
                     </Typography>
                     <Box sx={{ mt: 1 }}>
                       {car.features.map((feature, index) => (
-                        <Button key={index} variant="outlined" size="small" sx={{ mr: 1, mb: 1 }}>
+                        <Button
+                          key={index}
+                          variant="outlined"
+                          size="small"
+                          sx={{ mr: 1, mb: 1 }}
+                        >
                           {feature}
                         </Button>
                       ))}
