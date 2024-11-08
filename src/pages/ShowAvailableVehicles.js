@@ -90,14 +90,21 @@ const ShowAvailableVehicles = () => {
 
             <Box sx={{ mb: 3 }}>
               <Typography gutterBottom>Distance (in km)</Typography>
-              <Slider
-                value={distance}
-                onChange={handleDistanceChange}
-                valueLabelDisplay="auto"
-                min={0}
-                max={100}
-              />
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box sx={{ maxWidth: "70%", mx: "auto" }}>
+                {/* Adjust slider width */}
+                <Slider
+                  value={distance}
+                  onChange={handleDistanceChange}
+                  valueLabelDisplay="auto"
+                  min={0}
+                  max={100}
+                  sx={{ width: "100%" }} // Ensure slider stays within container width
+                />
+              </Box>
+              <Box
+                sx={{ display: "flex", justifyContent: "space-between", px: 2 }}
+              >
+                {/* Adjust label spacing */}
                 <Typography variant="caption">Min: 0 km</Typography>
                 <Typography variant="caption">Max: 100 km</Typography>
               </Box>
@@ -112,14 +119,19 @@ const ShowAvailableVehicles = () => {
 
             <Box sx={{ mb: 3 }}>
               <Typography gutterBottom>Total Price (₹)</Typography>
-              <Slider
-                value={priceRange}
-                onChange={handlePriceRangeChange}
-                valueLabelDisplay="auto"
-                min={200}
-                max={3800}
-              />
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Box sx={{ maxWidth: "70%", mx: "auto" }}>
+                {" "}
+                {/* Adjust slider width */}
+                <Slider
+                  value={priceRange}
+                  onChange={handlePriceRangeChange}
+                  valueLabelDisplay="auto"
+                  min={200}
+                  max={3800}
+                  sx={{ width: "100%" }} // Ensure slider stays within container width
+                />
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
                 <Typography variant="caption">Min: ₹200</Typography>
                 <Typography variant="caption">Max: ₹3800</Typography>
               </Box>
@@ -154,7 +166,9 @@ const ShowAvailableVehicles = () => {
                     control={
                       <Checkbox
                         checked={filters.transmission.includes(type)}
-                        onChange={() => handleFilterChange("transmission", type)}
+                        onChange={() =>
+                          handleFilterChange("transmission", type)
+                        }
                       />
                     }
                     label={type}
@@ -208,16 +222,20 @@ const ShowAvailableVehicles = () => {
                     handleFilterChange("userRating", e.target.value)
                   }
                 >
-                  {["4.5+ Rated", "4.2+ Rated", "4.0+ Rated", "3.5+ Rated", "All"].map(
-                    (rating) => (
-                      <FormControlLabel
-                        key={rating}
-                        value={rating}
-                        control={<Radio />}
-                        label={rating}
-                      />
-                    )
-                  )}
+                  {[
+                    "4.5+ Rated",
+                    "4.2+ Rated",
+                    "4.0+ Rated",
+                    "3.5+ Rated",
+                    "All",
+                  ].map((rating) => (
+                    <FormControlLabel
+                      key={rating}
+                      value={rating}
+                      control={<Radio />}
+                      label={rating}
+                    />
+                  ))}
                 </RadioGroup>
               </FormControl>
             </Box>
