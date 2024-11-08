@@ -6,7 +6,6 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Button,
   Slider,
   Checkbox,
   FormControlLabel,
@@ -17,7 +16,6 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-// import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const carData = [
   {
@@ -75,141 +73,158 @@ const ShowAvailableVehicles = () => {
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
       <Grid container spacing={3}>
+        {/* Filter Panel */}
         <Grid item xs={12} sm={3}>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="h6">Find Your Perfect Ride!</Typography>
-          </Box>
-
-          <Box sx={{ mb: 2 }}>
-            <Typography gutterBottom>Distance</Typography>
-            <Slider
-              value={distance}
-              onChange={handleDistanceChange}
-              valueLabelDisplay="auto"
-              min={0}
-              max={100}
-            />
-          </Box>
-
-          <Box sx={{ mb: 2 }}>
-            <FormControlLabel control={<Checkbox />} label="Home Delivery" />
-            <Typography variant="caption">
-              Additional Delivery charge's applicable
+          <Box
+            sx={{
+              backgroundColor: "white",
+              borderRadius: 2,
+              boxShadow: 3,
+              p: 2,
+              mb: 2,
+            }}
+          >
+            <Typography variant="h6" gutterBottom>
+              Find Your Perfect Ride!
             </Typography>
-          </Box>
 
-          <Box sx={{ mb: 2 }}>
-            <Typography gutterBottom>Total Price</Typography>
-            <Slider
-              value={priceRange}
-              onChange={handlePriceRangeChange}
-              valueLabelDisplay="auto"
-              min={200}
-              max={3800}
-            />
-          </Box>
+            <Box sx={{ mb: 3 }}>
+              <Typography gutterBottom>Distance (in km)</Typography>
+              <Slider
+                value={distance}
+                onChange={handleDistanceChange}
+                valueLabelDisplay="auto"
+                min={0}
+                max={100}
+              />
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography variant="caption">Min: 0 km</Typography>
+                <Typography variant="caption">Max: 100 km</Typography>
+              </Box>
+            </Box>
 
-          <Box sx={{ mb: 2 }}>
-            <Typography gutterBottom>Car Details</Typography>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Filter By Car Type</FormLabel>
-              {["SUV", "Sedan", "Hatchback", "Luxury"].map((type) => (
-                <FormControlLabel
-                  key={type}
-                  control={
-                    <Checkbox
-                      checked={filters.carType.includes(type)}
-                      onChange={() => handleFilterChange("carType", type)}
-                    />
-                  }
-                  label={type}
-                />
-              ))}
-            </FormControl>
-          </Box>
+            <Box sx={{ mb: 3 }}>
+              <FormControlLabel control={<Checkbox />} label="Home Delivery" />
+              <Typography variant="caption">
+                Additional Delivery charges applicable
+              </Typography>
+            </Box>
 
-          <Box sx={{ mb: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Filter By Transmission</FormLabel>
-              {["Manual", "Automatic"].map((type) => (
-                <FormControlLabel
-                  key={type}
-                  control={
-                    <Checkbox
-                      checked={filters.transmission.includes(type)}
-                      onChange={() => handleFilterChange("transmission", type)}
-                    />
-                  }
-                  label={type}
-                />
-              ))}
-            </FormControl>
-          </Box>
+            <Box sx={{ mb: 3 }}>
+              <Typography gutterBottom>Total Price (₹)</Typography>
+              <Slider
+                value={priceRange}
+                onChange={handlePriceRangeChange}
+                valueLabelDisplay="auto"
+                min={200}
+                max={3800}
+              />
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography variant="caption">Min: ₹200</Typography>
+                <Typography variant="caption">Max: ₹3800</Typography>
+              </Box>
+            </Box>
 
-          <Box sx={{ mb: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Filter By Fuel Type</FormLabel>
-              {["Diesel", "Petrol", "Electric"].map((type) => (
-                <FormControlLabel
-                  key={type}
-                  control={
-                    <Checkbox
-                      checked={filters.fuelType.includes(type)}
-                      onChange={() => handleFilterChange("fuelType", type)}
-                    />
-                  }
-                  label={type}
-                />
-              ))}
-            </FormControl>
-          </Box>
-
-          <Box sx={{ mb: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Seats</FormLabel>
-              {["4/5 Seater", "6/7 Seater"].map((type) => (
-                <FormControlLabel
-                  key={type}
-                  control={
-                    <Checkbox
-                      checked={filters.seats.includes(type)}
-                      onChange={() => handleFilterChange("seats", type)}
-                    />
-                  }
-                  label={type}
-                />
-              ))}
-            </FormControl>
-          </Box>
-
-          <Box sx={{ mb: 2 }}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">User Ratings</FormLabel>
-              <RadioGroup
-                value={filters.userRating}
-                onChange={(e) =>
-                  handleFilterChange("userRating", e.target.value)
-                }
-              >
-                {[
-                  "4.5+ Rated",
-                  "4.2+ Rated",
-                  "4.0+ Rated",
-                  "3.5+ Rated",
-                  "All",
-                ].map((rating) => (
+            {/* Additional Filters */}
+            <Box sx={{ mb: 3 }}>
+              <Typography gutterBottom>Car Details</Typography>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Filter By Car Type</FormLabel>
+                {["SUV", "Sedan", "Hatchback", "Luxury"].map((type) => (
                   <FormControlLabel
-                    key={rating}
-                    value={rating}
-                    control={<Radio />}
-                    label={rating}
+                    key={type}
+                    control={
+                      <Checkbox
+                        checked={filters.carType.includes(type)}
+                        onChange={() => handleFilterChange("carType", type)}
+                      />
+                    }
+                    label={type}
                   />
                 ))}
-              </RadioGroup>
-            </FormControl>
+              </FormControl>
+            </Box>
+
+            <Box sx={{ mb: 3 }}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Filter By Transmission</FormLabel>
+                {["Manual", "Automatic"].map((type) => (
+                  <FormControlLabel
+                    key={type}
+                    control={
+                      <Checkbox
+                        checked={filters.transmission.includes(type)}
+                        onChange={() => handleFilterChange("transmission", type)}
+                      />
+                    }
+                    label={type}
+                  />
+                ))}
+              </FormControl>
+            </Box>
+
+            <Box sx={{ mb: 3 }}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Filter By Fuel Type</FormLabel>
+                {["Diesel", "Petrol", "Electric"].map((type) => (
+                  <FormControlLabel
+                    key={type}
+                    control={
+                      <Checkbox
+                        checked={filters.fuelType.includes(type)}
+                        onChange={() => handleFilterChange("fuelType", type)}
+                      />
+                    }
+                    label={type}
+                  />
+                ))}
+              </FormControl>
+            </Box>
+
+            <Box sx={{ mb: 3 }}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">Seats</FormLabel>
+                {["4/5 Seater", "6/7 Seater"].map((type) => (
+                  <FormControlLabel
+                    key={type}
+                    control={
+                      <Checkbox
+                        checked={filters.seats.includes(type)}
+                        onChange={() => handleFilterChange("seats", type)}
+                      />
+                    }
+                    label={type}
+                  />
+                ))}
+              </FormControl>
+            </Box>
+
+            <Box sx={{ mb: 3 }}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend">User Ratings</FormLabel>
+                <RadioGroup
+                  value={filters.userRating}
+                  onChange={(e) =>
+                    handleFilterChange("userRating", e.target.value)
+                  }
+                >
+                  {["4.5+ Rated", "4.2+ Rated", "4.0+ Rated", "3.5+ Rated", "All"].map(
+                    (rating) => (
+                      <FormControlLabel
+                        key={rating}
+                        value={rating}
+                        control={<Radio />}
+                        label={rating}
+                      />
+                    )
+                  )}
+                </RadioGroup>
+              </FormControl>
+            </Box>
           </Box>
         </Grid>
 
+        {/* Vehicle List */}
         <Grid item xs={12} sm={9}>
           <Box
             sx={{
@@ -270,20 +285,8 @@ const ShowAvailableVehicles = () => {
                       {car.transmission} • {car.fuelType} • {car.seats} Seats
                     </Typography>
                     <Typography variant="body2">
-                      {car.distance} km away
+                      Distance: {car.distance} km away
                     </Typography>
-                    <Box sx={{ mt: 1 }}>
-                      {car.features.map((feature, index) => (
-                        <Button
-                          key={index}
-                          variant="outlined"
-                          size="small"
-                          sx={{ mr: 1, mb: 1 }}
-                        >
-                          {feature}
-                        </Button>
-                      ))}
-                    </Box>
                   </CardContent>
                 </Card>
               </Grid>
