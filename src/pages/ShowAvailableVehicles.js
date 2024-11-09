@@ -74,7 +74,7 @@ const ShowAvailableVehicles = () => {
     <Box sx={{ flexGrow: 1, p: 3 }}>
       <Grid container spacing={3}>
         {/* Filter Panel */}
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} sm={2.5}>
           <Box
             sx={{
               backgroundColor: "white",
@@ -90,7 +90,7 @@ const ShowAvailableVehicles = () => {
 
             <Box sx={{ mb: 3 }}>
               <Typography gutterBottom>Distance (in km)</Typography>
-              <Box sx={{ maxWidth: "70%", mx: "auto" }}>
+              <Box sx={{ maxWidth: "90%" }}>
                 {/* Adjust slider width */}
                 <Slider
                   value={distance}
@@ -102,9 +102,14 @@ const ShowAvailableVehicles = () => {
                 />
               </Box>
               <Box
-                sx={{ display: "flex", justifyContent: "space-between", px: 2 }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  maxWidth: "90%",
+                  mt: -1.5,
+                }}
               >
-                {/* Adjust label spacing */}
+                {/* Aligns Min/Max with slider */}
                 <Typography variant="caption">Min: 0 km</Typography>
                 <Typography variant="caption">Max: 100 km</Typography>
               </Box>
@@ -112,6 +117,7 @@ const ShowAvailableVehicles = () => {
 
             <Box sx={{ mb: 3 }}>
               <FormControlLabel control={<Checkbox />} label="Home Delivery" />
+              <br />
               <Typography variant="caption">
                 Additional Delivery charges applicable
               </Typography>
@@ -119,7 +125,7 @@ const ShowAvailableVehicles = () => {
 
             <Box sx={{ mb: 3 }}>
               <Typography gutterBottom>Total Price (₹)</Typography>
-              <Box sx={{ maxWidth: "70%", mx: "auto" }}>
+              <Box sx={{ maxWidth: "90%" }}>
                 {" "}
                 {/* Adjust slider width */}
                 <Slider
@@ -131,7 +137,16 @@ const ShowAvailableVehicles = () => {
                   sx={{ width: "100%" }} // Ensure slider stays within container width
                 />
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  maxWidth: "90%",
+                  mt: -1.5,
+                }}
+              >
+                {" "}
+                {/* Aligns Min/Max with slider */}
                 <Typography variant="caption">Min: ₹200</Typography>
                 <Typography variant="caption">Max: ₹3800</Typography>
               </Box>
