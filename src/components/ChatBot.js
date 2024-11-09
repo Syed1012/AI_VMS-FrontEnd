@@ -14,7 +14,7 @@ const ChatBot = () => {
     const timer = setTimeout(() => {
       setIsOpen(true);
       setMessages([
-        { text: "Hi, I'm AI from MHP Porsche! How can I help?", isBot: true },
+        { text: "Hi, I'm AI of AI-VMS! Is there anyway i can help? 😊", isBot: true },
       ]);
     }, 2000);
 
