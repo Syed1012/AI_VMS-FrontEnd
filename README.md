@@ -65,7 +65,7 @@ AI VMS (Vehicle Maintenance System) is a Java-based Spring Boot application desi
 
 3. **Configure the database:**
 
-    Update the `application.properties` file (in `src/main/resources`) with your database connection details of MongoDB
+    Update the `.env` file (in `root folder`) with your database connection details of MongoDB
 
     ```properties
     MONGO_URI=mongodb+srv://id:passwordsupplychain.Cksna.mongodb.net/
