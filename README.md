@@ -47,7 +47,7 @@ AI VMS (Vehicle Maintenance System) is a Java-based Spring Boot application desi
 
 - Java 11 or higher
 - Maven 4.0 or higher
-- PostgreSQL/MySQL installed and configured
+- MongoDB installed and configured
 
 ### Steps
 
@@ -65,13 +65,11 @@ AI VMS (Vehicle Maintenance System) is a Java-based Spring Boot application desi
 
 3. **Configure the database:**
 
-    Update the `application.properties` file (in `src/main/resources`) with your database connection details:
+    Update the `application.properties` file (in `src/main/resources`) with your database connection details of MongoDB
 
     ```properties
-    spring.datasource.url=jdbc:postgresql://localhost:5432/vehicle_maintenance
-    spring.datasource.username=your_db_username
-    spring.datasource.password=your_db_password
-    spring.jpa.hibernate.ddl-auto=update
+    MONGO_URI=mongodb+srv://id:passwordsupplychain.Cksna.mongodb.net/
+    MONGO_DB=supply_chain
     ```
 
 4. **Build the project:**
