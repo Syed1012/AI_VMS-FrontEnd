@@ -17,9 +17,6 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
-// import EditIcon from "@mui/icons-material/Edit";
-// import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import TuneIcon from "@mui/icons-material/Tune";
 
 const carData = [
