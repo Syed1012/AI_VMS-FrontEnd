@@ -75,37 +75,8 @@ const ShowAvailableVehicles = () => {
     }));
   };
 
-  // Custom Thumb component for the Slider
-  const CustomSlider = (props) => (
-    <Slider
-      {...props}
-      sx={{
-        "& .MuiSlider-thumb": {
-          color: "#3f51b5", // Color of the car icon
-          "&:before": {
-            display: "none", // Remove default inner ring
-          },
-          "& > *": {
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "24px",
-            height: "24px",
-            borderRadius: "50%",
-            backgroundColor: "#fff", // Background behind the icon
-            boxShadow: "0px 2px 5px rgba(0,0,0,0.2)", // Light shadow for effect
-          },
-        },
-      }}
-      components={{
-        Thumb: (props) => (
-          <Box {...props}>
-            <DirectionsCarIcon fontSize="small" />
-          </Box>
-        ),
-      }}
-    />
-  );
+  // Removed Custom Thumb component for the Slider
+ 
 
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
@@ -305,7 +276,7 @@ const ShowAvailableVehicles = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-              }} // Centers the button
+              }} 
               // onClick={applyFilters} // Add an event handler for applying filters
             >
               Apply Filters
