@@ -41,6 +41,11 @@ AI VMS (Vehicle Maintenance System) is a Java-based Spring Boot application desi
 
 ---
 
+## Deployed On:
+ - Vercel = https://ai-vms.vercel.app/
+
+---
+
 ## 📦 Installation
 
 ### Prerequisites
