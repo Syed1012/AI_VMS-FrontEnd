@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   Typography,
@@ -8,138 +8,84 @@ import {
   Radio,
   RadioGroup,
   FormControl,
-  FormLabel
-} from '@/components/ui/card';
+  FormLabel,
+  Button,
+} from "@mui/material";
+import TuneIcon from "@mui/icons-material/Tune";
 
-const FilterPanel = ({ filters, distance, priceRange, onFilterChange, onDistanceChange, onPriceRangeChange }) => {
-  const handleFilterChange = (category, value) => {
-    onFilterChange(category, value);
-  };
-
-  return (
-    <Box>
-      <Box className="mb-4">
-        <Typography variant="h6">Find Your Perfect Ride!</Typography>
-      </Box>
-      
-      <Box className="mb-4">
-        <Typography className="mb-2">Distance</Typography>
-        <Slider
-          value={distance}
-          onChange={onDistanceChange}
-          className="w-full"
-          min={0}
-          max={100}
-        />
-      </Box>
-
-      <Box className="mb-4">
-        <FormControlLabel
-          control={<Checkbox />}
-          label="Home Delivery"
-        />
-        <Typography className="text-sm text-gray-500">Additional Delivery charge applicable</Typography>
-      </Box>
-
-      <Box className="mb-4">
-        <Typography className="mb-2">Total Price</Typography>
-        <Slider
-          value={priceRange}
-          onChange={onPriceRangeChange}
-          className="w-full"
-          min={200}
-          max={3800}
-        />
-      </Box>
-
-      <Box className="mb-4">
-        <Typography className="mb-2">Car Details</Typography>
-        <FormControl>
-          <FormLabel>Filter By Car Type</FormLabel>
-          {['SUV', 'Sedan', 'Hatchback', 'Luxury'].map((type) => (
-            <FormControlLabel
-              key={type}
-              control={
-                <Checkbox 
-                  checked={filters.carType.includes(type)} 
-                  onChange={() => handleFilterChange('carType', type)} 
-                />
-              }
-              label={type}
-            />
-          ))}
-        </FormControl>
-      </Box>
-
-      <Box className="mb-4">
-        <FormControl>
-          <FormLabel>Filter By Transmission</FormLabel>
-          {['Manual', 'Automatic'].map((type) => (
-            <FormControlLabel
-              key={type}
-              control={
-                <Checkbox 
-                  checked={filters.transmission.includes(type)} 
-                  onChange={() => handleFilterChange('transmission', type)} 
-                />
-              }
-              label={type}
-            />
-          ))}
-        </FormControl>
-      </Box>
-
-      <Box className="mb-4">
-        <FormControl>
-          <FormLabel>Filter By Fuel Type</FormLabel>
-          {['Diesel', 'Petrol', 'Electric'].map((type) => (
-            <FormControlLabel
-              key={type}
-              control={
-                <Checkbox 
-                  checked={filters.fuelType.includes(type)} 
-                  onChange={() => handleFilterChange('fuelType', type)} 
-                />
-              }
-              label={type}
-            />
-          ))}
-        </FormControl>
-      </Box>
-
-      <Box className="mb-4">
-        <FormControl>
-          <FormLabel>Seats</FormLabel>
-          {['4/5 Seater', '6/7 Seater'].map((type) => (
-            <FormControlLabel
-              key={type}
-              control={
-                <Checkbox 
-                  checked={filters.seats.includes(type)} 
-                  onChange={() => handleFilterChange('seats', type)} 
-                />
-              }
-              label={type}
-            />
-          ))}
-        </FormControl>
-      </Box>
-
-      <Box className="mb-4">
-        <FormControl>
-          <FormLabel>User Ratings</FormLabel>
-          <RadioGroup
-            value={filters.userRating}
-            onChange={(e) => handleFilterChange('userRating', e.target.value)}
-          >
-            {['4.5+ Rated', '4.2+ Rated', '4.0+ Rated', '3.5+ Rated', 'All'].map((rating) => (
-              <FormControlLabel key={rating} value={rating} control={<Radio />} label={rating} />
-            ))}
-          </RadioGroup>
-        </FormControl>
-      </Box>
+const FilterPanel = ({
+  distance,
+  handleDistanceChange,
+  priceRange,
+  handlePriceRangeChange,
+  filters,
+  handleFilterChange,
+  onApplyFilters,
+}) => (
+  <Box sx={{ backgroundColor: "white", borderRadius: 2, boxShadow: 3, p: 2 }}>
+    <Typography variant="h6" gutterBottom>
+      Find Your Perfect Ride!
+    </Typography>
+    
+    {/* Distance Filter */}
+    <Box sx={{ mb: 3 }}>
+      <Typography gutterBottom>Distance (in km)</Typography>
+      <Slider
+        value={distance}
+        onChange={handleDistanceChange}
+        valueLabelDisplay="auto"
+        min={0}
+        max={100}
+        sx={{ width: "100%" }}
+      />
     </Box>
-  );
-};
 
-export default FilterPanel
+    {/* Home Delivery Checkbox */}
+    <FormControlLabel control={<Checkbox />} label="Home Delivery" />
+    <Typography variant="caption">
+      Additional Delivery charges applicable
+    </Typography>
+
+    {/* Price Range Slider */}
+    <Box sx={{ mb: 3 }}>
+      <Typography gutterBottom>Total Price (₹)</Typography>
+      <Slider
+        value={priceRange}
+        onChange={handlePriceRangeChange}
+        valueLabelDisplay="auto"
+        min={200}
+        max={3800}
+        sx={{ width: "100%" }}
+      />
+    </Box>
+
+    {/* Additional Filters */}
+    <FormControl component="fieldset">
+      <FormLabel>Filter By Car Type</FormLabel>
+      {["SUV", "Sedan", "Hatchback", "Luxury"].map((type) => (
+        <FormControlLabel
+          key={type}
+          control={
+            <Checkbox
+              checked={filters.carType.includes(type)}
+              onChange={() => handleFilterChange("carType", type)}
+            />
+          }
+          label={type}
+        />
+      ))}
+    </FormControl>
+
+    {/* Apply Filters Button */}
+    <Button
+      variant="contained"
+      color="primary"
+      startIcon={<TuneIcon />}
+      onClick={onApplyFilters}
+    >
+      Apply Filters
+    </Button>
+  </Box>
+);
+
+export default FilterPanel;
