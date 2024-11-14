@@ -9,7 +9,9 @@ import {
   IconButton,
   styled,
   Chip,
-  Stack
+  Stack,
+  Button,
+  CardActions
 } from '@mui/material';
 import {
   Favorite,
@@ -19,9 +21,12 @@ import {
   LocationOn
 } from '@mui/icons-material';
 
-// Styled components
+// Previous styled components remain the same
 const StyledCard = styled(Card)(({ theme }) => ({
   position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
   '&:hover .navigation-arrows': {
     opacity: 1,
   },
@@ -81,8 +86,25 @@ const StyledChip = styled(Chip)(({ theme }) => ({
   fontSize: '0.75rem',
 }));
 
+const StyledCardActions = styled(CardActions)(({ theme }) => ({
+  padding: theme.spacing(2),
+  marginTop: 'auto', // This pushes the button to the bottom
+  borderTop: `1px solid ${theme.palette.divider}`,
+}));
+
+const InspectButton = styled(Button)(({ theme }) => ({
+  width: '100%',
+  padding: theme.spacing(1),
+  fontWeight: 600,
+  textTransform: 'none', // Prevents uppercase transformation
+}));
+
 const CarCard = ({ car }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleInspect = () => {
+    window.location.href = '#'; // For now, just navigate to #
+  };
 
   return (
     <StyledCard>
@@ -149,6 +171,16 @@ const CarCard = ({ car }) => {
           ))}
         </Stack>
       </CardContent>
+
+      <StyledCardActions>
+        <InspectButton 
+          variant="contained" 
+          color="primary"
+          onClick={handleInspect}
+        >
+          Inspect
+        </InspectButton>
+      </StyledCardActions>
     </StyledCard>
   );
 };
