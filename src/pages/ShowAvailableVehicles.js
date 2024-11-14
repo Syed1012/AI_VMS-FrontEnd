@@ -7,8 +7,6 @@ import {
   Slider,
   Checkbox,
   FormControlLabel,
-  Radio,
-  RadioGroup,
   FormControl,
   FormLabel,
   Select,
@@ -22,8 +20,8 @@ import CarCard from './../components/CarCard';
 const carData = [
   {
     id: 1,
-    name: "Maruti Suzuki Swift 2022",
     image: "https://imgd.aeplcdn.com/1056x594/n/itk98db_1738093.jpg?q=80",
+    name: "Maruti Suzuki Swift 2022",
     rating: 4.15,
     trips: 199,
     price: 90,
@@ -32,7 +30,7 @@ const carData = [
     fuelType: "Petrol",
     seats: 5,
     distance: 3.4,
-    features: ["ACTIVE FASTAG"],
+    tags: ["ACTIVE FASTAG"],
   },
   // Add more car objects here...
 ];
