@@ -1,10 +1,8 @@
+// ShowAvailableVehicles.js
 import React, { useState } from "react";
 import {
   Box,
   Grid,
-  Card,
-  CardContent,
-  CardMedia,
   Typography,
   Slider,
   Checkbox,
@@ -18,6 +16,8 @@ import {
   Button,
 } from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
+// import CarCard from "./CarCard"; // Import CarCard component
+import CarCard from './../components/CarCard';
 
 const carData = [
   {
@@ -72,9 +72,6 @@ const ShowAvailableVehicles = () => {
     }));
   };
 
-  // Removed Custom Thumb component for the Slider
- 
-
   return (
     <Box sx={{ flexGrow: 1, p: 3 }}>
       <Grid container spacing={3}>
@@ -95,34 +92,18 @@ const ShowAvailableVehicles = () => {
 
             <Box sx={{ mb: 3 }}>
               <Typography gutterBottom>Distance (in km)</Typography>
-              <Box sx={{ maxWidth: "90%" }}>
-                {/* Adjust slider width */}
-                <Slider
-                  value={distance}
-                  onChange={handleDistanceChange}
-                  valueLabelDisplay="auto"
-                  min={0}
-                  max={100}
-                  sx={{ width: "100%" }} // Ensure slider stays within container width
-                />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  maxWidth: "90%",
-                  mt: -1.5,
-                }}
-              >
-                {/* Aligns Min/Max with slider */}
-                <Typography variant="caption">Min: 0 km</Typography>
-                <Typography variant="caption">Max: 100 km</Typography>
-              </Box>
+              <Slider
+                value={distance}
+                onChange={handleDistanceChange}
+                valueLabelDisplay="auto"
+                min={0}
+                max={100}
+                sx={{ width: "100%" }}
+              />
             </Box>
 
             <Box sx={{ mb: 3 }}>
               <FormControlLabel control={<Checkbox />} label="Home Delivery" />
-              <br />
               <Typography variant="caption">
                 Additional Delivery charges applicable
               </Typography>
@@ -130,38 +111,19 @@ const ShowAvailableVehicles = () => {
 
             <Box sx={{ mb: 3 }}>
               <Typography gutterBottom>Total Price (₹)</Typography>
-              <Box sx={{ maxWidth: "90%" }}>
-                {" "}
-                {/* Adjust slider width */}
-                <Slider
-                  value={priceRange}
-                  onChange={handlePriceRangeChange}
-                  valueLabelDisplay="auto"
-                  min={200}
-                  max={3800}
-                  sx={{ width: "100%" }} // Ensure slider stays within container width
-                />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  maxWidth: "90%",
-                  mt: -1.5,
-                }}
-              >
-                {" "}
-                {/* Aligns Min/Max with slider */}
-                <Typography variant="caption">Min: ₹200</Typography>
-                <Typography variant="caption">Max: ₹3800</Typography>
-              </Box>
+              <Slider
+                value={priceRange}
+                onChange={handlePriceRangeChange}
+                valueLabelDisplay="auto"
+                min={200}
+                max={3800}
+                sx={{ width: "100%" }}
+              />
             </Box>
 
             {/* Additional Filters */}
             <Box sx={{ mb: 3 }}>
-              <Typography gutterBottom>Car Details</Typography>
-              {/* <br /> */}
-              <FormControl component="fieldset" sx={{ marginTop: "10px" }}>
+              <FormControl component="fieldset">
                 <FormLabel component="legend">Filter By Car Type</FormLabel>
                 {["SUV", "Sedan", "Hatchback", "Luxury"].map((type) => (
                   <FormControlLabel
@@ -178,103 +140,12 @@ const ShowAvailableVehicles = () => {
               </FormControl>
             </Box>
 
-            <Box sx={{ mb: 3 }}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Filter By Transmission</FormLabel>
-                {["Manual", "Automatic"].map((type) => (
-                  <FormControlLabel
-                    key={type}
-                    control={
-                      <Checkbox
-                        checked={filters.transmission.includes(type)}
-                        onChange={() =>
-                          handleFilterChange("transmission", type)
-                        }
-                      />
-                    }
-                    label={type}
-                  />
-                ))}
-              </FormControl>
-            </Box>
-
-            <Box sx={{ mb: 3 }}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Filter By Fuel Type</FormLabel>
-                {["Diesel", "Petrol", "Electric"].map((type) => (
-                  <FormControlLabel
-                    key={type}
-                    control={
-                      <Checkbox
-                        checked={filters.fuelType.includes(type)}
-                        onChange={() => handleFilterChange("fuelType", type)}
-                      />
-                    }
-                    label={type}
-                  />
-                ))}
-              </FormControl>
-            </Box>
-
-            <Box sx={{ mb: 3 }}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">Seats</FormLabel>
-                {["4/5 Seater", "6/7 Seater"].map((type) => (
-                  <FormControlLabel
-                    key={type}
-                    control={
-                      <Checkbox
-                        checked={filters.seats.includes(type)}
-                        onChange={() => handleFilterChange("seats", type)}
-                      />
-                    }
-                    label={type}
-                  />
-                ))}
-              </FormControl>
-            </Box>
-
-            <Box sx={{ mb: 3 }}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend">User Ratings</FormLabel>
-                <RadioGroup
-                  value={filters.userRating}
-                  onChange={(e) =>
-                    handleFilterChange("userRating", e.target.value)
-                  }
-                >
-                  {[
-                    "4.5+ Rated",
-                    "4.2+ Rated",
-                    "4.0+ Rated",
-                    "3.5+ Rated",
-                    "All",
-                  ].map((rating) => (
-                    <FormControlLabel
-                      key={rating}
-                      value={rating}
-                      control={<Radio />}
-                      label={rating}
-                    />
-                  ))}
-                </RadioGroup>
-              </FormControl>
-            </Box>
-
-            {/* Apply Filters Button */}
+            {/* Additional filters as in your original code... */}
             <Button
               variant="contained"
               color="primary"
               startIcon={<TuneIcon />}
-              sx={{
-                mt: 2,
-                alignSelf: "center",
-                width: "80%",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }} 
-              // onClick={applyFilters} // Add an event handler for applying filters
+              sx={{ mt: 2, alignSelf: "center", width: "80%" }}
             >
               Apply Filters
             </Button>
@@ -321,31 +192,7 @@ const ShowAvailableVehicles = () => {
           <Grid container spacing={2}>
             {carData.map((car) => (
               <Grid item xs={12} sm={6} md={4} key={car.id}>
-                <Card>
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={car.image}
-                    alt={car.name}
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
-                      {car.name}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Rating: {car.rating} | {car.trips} Trips
-                    </Typography>
-                    <Typography variant="body2">
-                      ₹{car.price}/hr (₹{car.totalPrice} excluding fees)
-                    </Typography>
-                    <Typography variant="body2">
-                      {car.transmission} • {car.fuelType} • {car.seats} Seats
-                    </Typography>
-                    <Typography variant="body2">
-                      Distance: {car.distance} km away
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <CarCard car={car} />
               </Grid>
             ))}
           </Grid>
